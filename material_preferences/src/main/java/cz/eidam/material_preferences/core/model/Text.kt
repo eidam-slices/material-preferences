@@ -1,4 +1,4 @@
-package cz.eidam.material_preferences.model
+package cz.eidam.material_preferences.core.model
 
 import androidx.annotation.StringRes
 import androidx.compose.runtime.Composable

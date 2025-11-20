@@ -1,8 +1,9 @@
-package cz.eidam.material_preferences.composable.draw
+package cz.eidam.material_preferences.generic.ui
 
 import android.util.Log
 import androidx.compose.runtime.Composable
-import cz.eidam.material_preferences.model.PreferenceRow
+import cz.eidam.material_preferences.generic.model.PreferenceRow
+
 
 @Composable
 internal fun DrawPreferenceRow(
