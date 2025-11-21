@@ -7,6 +7,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
+import cz.eidam.material_preferences.core.model.PreferenceDialogProperties
 import cz.eidam.material_preferences.generic.ui.PreferenceRow
 
 @Composable
@@ -17,6 +18,7 @@ fun PreferenceSlider(
     onValueChange: (Float) -> Unit,
     valueRange: ClosedFloatingPointRange<Float>,
     step: Float,
+    dialogProperties: PreferenceDialogProperties = PreferenceDialogProperties.default(title),
     transform: (Float) -> String,
 ) {
 
@@ -40,11 +42,11 @@ fun PreferenceSlider(
     if (dialogVisible) {
         SliderDialog(
             onDismissRequest = { dialogVisible = false },
-            label = title,
             value = value,
             onValueChange = onValueChange,
             valueRange = valueRange,
             step = step,
+            properties = dialogProperties,
             transform = transform,
         )
     }
