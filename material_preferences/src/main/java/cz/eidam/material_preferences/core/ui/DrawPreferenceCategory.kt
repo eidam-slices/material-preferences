@@ -1,4 +1,4 @@
-package cz.eidam.material_preferences.category.ui
+package cz.eidam.material_preferences.core.ui
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -8,7 +8,6 @@ import androidx.compose.runtime.setValue
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
 import cz.eidam.material_preferences.category.model.PreferenceCategory
-import cz.eidam.material_preferences.generic.ui.DrawPreferenceRow
 
 @Composable
 internal fun DrawPreferenceCategory(
@@ -17,7 +16,7 @@ internal fun DrawPreferenceCategory(
 ) {
     var expanded by rememberSaveable { mutableStateOf(true) }
 
-    PreferenceCategory(
+    cz.eidam.material_preferences.category.ui.PreferenceCategory(
         title = category.title?.value(),
         onExpandedChange = if (category.collapsible) {
             { expanded = it }
