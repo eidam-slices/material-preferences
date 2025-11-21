@@ -8,4 +8,6 @@ open class PreferenceScope {
     private val _all = mutableListOf<PreferenceRow>()
     val all: List<PreferenceRow> get() = _all
 
+    // ? TODO: make internal ?
+    fun add(row: () -> PreferenceRow) { _all.add(row()) }
 }
