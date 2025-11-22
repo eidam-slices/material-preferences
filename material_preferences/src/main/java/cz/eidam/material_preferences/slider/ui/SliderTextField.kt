@@ -94,6 +94,7 @@ fun SliderTextField(
                     keyboardController?.hide()
                 }
                 text = transform(value)
+                formattingEnabled = true
             },
         )
     }
