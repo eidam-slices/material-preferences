@@ -1,4 +1,4 @@
-package cz.eidam.material_preferences.range_slider.ui
+package cz.eidam.material_preferences.rangeslider.ui
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.text.BasicText

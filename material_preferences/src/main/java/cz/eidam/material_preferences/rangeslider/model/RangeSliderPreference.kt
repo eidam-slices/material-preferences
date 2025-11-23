@@ -1,4 +1,4 @@
-package cz.eidam.material_preferences.range_slider.model
+package cz.eidam.material_preferences.rangeslider.model
 
 import cz.eidam.material_preferences.core.model.Text
 import cz.eidam.material_preferences.generic.model.Preference
