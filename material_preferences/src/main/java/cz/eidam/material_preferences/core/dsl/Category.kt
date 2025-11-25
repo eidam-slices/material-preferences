@@ -4,6 +4,7 @@ import androidx.annotation.StringRes
 import cz.eidam.material_preferences.category.model.PreferenceCategory
 import cz.eidam.material_preferences.core.model.Text
 
+// No title Overload
 fun PreferenceScope.category(
     content: PreferenceScope.() -> Unit
 ) = add {
@@ -13,6 +14,7 @@ fun PreferenceScope.category(
     ).apply(content)
 }
 
+// String title Overload
 fun PreferenceScope.category(
     title: String? = null,
     content: PreferenceScope.() -> Unit
@@ -23,6 +25,7 @@ fun PreferenceScope.category(
     ).apply(content)
 }
 
+// String Resource title Overload
 fun PreferenceScope.category(
     @StringRes title: Int? = null,
     content: PreferenceScope.() -> Unit
@@ -33,12 +36,24 @@ fun PreferenceScope.category(
     ).apply(content)
 }
 
+// Collapsible / String title Overload
 fun PreferenceScope.collapsibleCategory(
-    @StringRes title: Int? = null,
+    title: String,
     content: PreferenceScope.() -> Unit
 ) = add {
     PreferenceCategory(
         title = Text(title),
-        collapsible = false,
+        collapsible = true,
+    ).apply(content)
+}
+
+// Collapsible / String Resource title Overload
+fun PreferenceScope.collapsibleCategory(
+    @StringRes title: Int,
+    content: PreferenceScope.() -> Unit
+) = add {
+    PreferenceCategory(
+        title = Text(title),
+        collapsible = true,
     ).apply(content)
 }
