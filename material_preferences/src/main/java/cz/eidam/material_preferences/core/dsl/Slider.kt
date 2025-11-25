@@ -2,7 +2,6 @@ package cz.eidam.material_preferences.core.dsl
 
 import androidx.annotation.StringRes
 import cz.eidam.material_preferences.core.model.Text
-import cz.eidam.material_preferences.core.utils.createSliderNumberFormatter
 import cz.eidam.material_preferences.slider.model.SliderPreference
 
 
@@ -14,16 +13,16 @@ fun PreferenceScope.slider(
     valueRange: ClosedFloatingPointRange<Float>,
     defaultValue: Float,
     step: Float,
-    transform: (Float) -> String,
+    valueFormatter: (Float) -> String,
 ) = add {
-    SliderPreference(
+    SliderPreference.Custom(
         key = key,
         title = Text(title)!!,
         description = Text(description),
         valueRange = valueRange,
         defaultValue = defaultValue,
         step = step,
-        transform = transform,
+        valueFormatter = valueFormatter,
     )
 }
 
@@ -35,16 +34,16 @@ fun PreferenceScope.slider(
     valueRange: ClosedFloatingPointRange<Float>,
     defaultValue: Float,
     step: Float,
-    transform: (Float) -> String,
+    valueFormatter: (Float) -> String,
 ) = add {
-    SliderPreference(
+    SliderPreference.Custom(
         key = key,
         title = Text(title)!!,
         description = Text(description),
         valueRange = valueRange,
         defaultValue = defaultValue,
         step = step,
-        transform = transform,
+        valueFormatter = valueFormatter,
     )
 }
 
@@ -58,17 +57,14 @@ fun PreferenceScope.slider(
     step: Float,
     unit: String,
 ) = add {
-    val formatter = createSliderNumberFormatter(step)
-    SliderPreference(
+    SliderPreference.WithUnit(
         key = key,
         title = Text(title)!!,
         description = Text(description),
         valueRange = valueRange,
         defaultValue = defaultValue,
         step = step,
-        transform = { value ->
-            formatter.format(value) + " " + unit
-        },
+        unit = unit,
     )
 }
 
@@ -82,16 +78,13 @@ fun PreferenceScope.slider(
     step: Float,
     unit: String,
 ) = add {
-    val formatter = createSliderNumberFormatter(step)
-    SliderPreference(
+    SliderPreference.WithUnit(
         key = key,
         title = Text(title)!!,
         description = Text(description),
         valueRange = valueRange,
         defaultValue = defaultValue,
         step = step,
-        transform = { value ->
-            formatter.format(value) + " " + unit
-        },
+        unit = unit,
     )
 }
