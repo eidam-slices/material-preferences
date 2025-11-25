@@ -20,3 +20,24 @@ open class PreferenceDialogProperties(
         }
     }
 }
+
+data class TextFieldDialogProperties(
+    override val title: String,
+    override val confirmText: String,
+    override val cancelText: String,
+    val label: String?,
+    val placeholder: String?,
+): PreferenceDialogProperties(title, confirmText, cancelText) {
+
+
+    companion object {
+        @Composable
+        fun default(title: String) = TextFieldDialogProperties(
+            title = title,
+            confirmText = stringResource(android.R.string.ok),
+            cancelText = stringResource(android.R.string.cancel),
+            label = null,
+            placeholder = null
+        )
+    }
+}
