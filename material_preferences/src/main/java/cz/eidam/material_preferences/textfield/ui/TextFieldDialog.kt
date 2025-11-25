@@ -1,4 +1,4 @@
-package cz.eidam.material_preferences.text.ui
+package cz.eidam.material_preferences.textfield.ui
 
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.OutlinedTextField
@@ -13,7 +13,7 @@ import androidx.compose.ui.Modifier
 import cz.eidam.material_preferences.core.model.TextFieldDialogProperties
 
 @Composable
-fun TextDialog(
+fun TextFieldDialog(
     onDismissRequest: () -> Unit,
     title: String,
     value: String,

@@ -1,4 +1,4 @@
-package cz.eidam.material_preferences.text.ui
+package cz.eidam.material_preferences.textfield.ui
 
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
@@ -11,7 +11,7 @@ import cz.eidam.material_preferences.core.model.TextFieldDialogProperties
 import cz.eidam.material_preferences.generic.ui.PreferenceRow
 
 @Composable
-fun PreferenceText(
+fun PreferenceTextField(
     title: String,
     description: String? = null,
     value: String,
@@ -35,7 +35,7 @@ fun PreferenceText(
 
 
     if (dialogVisible) {
-        TextDialog(
+        TextFieldDialog(
             onDismissRequest = { dialogVisible = false },
             title = title,
             value = value,

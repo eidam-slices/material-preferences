@@ -2,7 +2,7 @@ package cz.eidam.material_preferences.core.dsl
 
 import androidx.annotation.StringRes
 import cz.eidam.material_preferences.core.model.Text
-import cz.eidam.material_preferences.text.model.TextPreference
+import cz.eidam.material_preferences.textfield.model.TextFieldPreference
 
 // String Overload
 fun PreferenceScope.textField(
@@ -11,7 +11,7 @@ fun PreferenceScope.textField(
     description: String? = null,
     defaultValue: String,
 ) = add {
-    TextPreference.Modal(
+    TextFieldPreference.Modal(
         key = key,
         title = Text(title)!!,
         description = Text(description),
@@ -26,7 +26,7 @@ fun PreferenceScope.textField(
     @StringRes description: Int? = null,
     defaultValue: String,
 ) = add {
-    TextPreference.Modal(
+    TextFieldPreference.Modal(
         key = key,
         title = Text(title)!!,
         description = Text(description),
@@ -41,7 +41,7 @@ fun PreferenceScope.inlineTextField(
     description: String? = null,
     defaultValue: String,
 ) = add {
-    TextPreference.Inline(
+    TextFieldPreference.Inline(
         key = key,
         title = Text(title)!!,
         description = Text(description),
@@ -56,7 +56,7 @@ fun PreferenceScope.inlineTextField(
     @StringRes description: Int? = null,
     defaultValue: String,
 ) = add {
-    TextPreference.Inline(
+    TextFieldPreference.Inline(
         key = key,
         title = Text(title)!!,
         description = Text(description),

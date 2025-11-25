@@ -1,4 +1,4 @@
-package cz.eidam.material_preferences.text.ui
+package cz.eidam.material_preferences.textfield.ui
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.IntrinsicSize
@@ -14,7 +14,7 @@ import androidx.compose.ui.unit.dp
 import cz.eidam.material_preferences.generic.ui.PreferenceRow
 
 @Composable
-fun PreferenceTextInline(
+fun PreferenceTextFieldInline(
     title: String,
     description: String? = null,
     value: String,
