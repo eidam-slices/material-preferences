@@ -13,6 +13,7 @@ import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import cz.eidam.material_preferences.core.model.PreferenceDialogProperties
+import cz.eidam.material_preferences.core.utils.FloatRangeSaver
 import cz.eidam.material_preferences.core.utils.coerceIn
 import cz.eidam.material_preferences.core.utils.roundToStep
 
@@ -27,7 +28,7 @@ fun RangeSliderDialog(
     properties: PreferenceDialogProperties,
     modifier: Modifier = Modifier,
 ) {
-    var internal by rememberSaveable { mutableStateOf(value) }
+    var internal by rememberSaveable(stateSaver = FloatRangeSaver) { mutableStateOf(value) }
 
     AlertDialog(
         onDismissRequest = onDismissRequest,
