@@ -15,6 +15,7 @@ internal sealed class MultiChoicePreference: Preference() {
         override val defaultValue: Set<String>,
         override val entries: List<Text>,
         override val entryValues: List<String>,
+        val tooltipEnabled: Boolean,
         val valueFormatter: (List<String>) -> String,
     ): MultiChoicePreference()
 

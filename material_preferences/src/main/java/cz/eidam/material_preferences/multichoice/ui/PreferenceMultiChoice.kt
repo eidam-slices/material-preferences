@@ -1,5 +1,9 @@
 package cz.eidam.material_preferences.multichoice.ui
 
+import androidx.compose.foundation.ExperimentalFoundationApi
+import androidx.compose.foundation.layout.Column
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -9,6 +13,7 @@ import androidx.compose.runtime.setValue
 import cz.eidam.material_preferences.core.model.PreferenceDialogProperties
 import cz.eidam.material_preferences.generic.ui.PreferenceRow
 
+@OptIn(ExperimentalFoundationApi::class, ExperimentalMaterial3Api::class)
 @Composable
 fun PreferenceMultiChoice(
     title: String,
@@ -17,7 +22,9 @@ fun PreferenceMultiChoice(
     onValueChange: (Set<String>) -> Unit,
     entries: List<String>,
     entryValues: List<String>,
-    dialogProperties: PreferenceDialogProperties = PreferenceDialogProperties.default(title)
+    tooltipEnabled: Boolean = true,
+    dialogProperties: PreferenceDialogProperties = PreferenceDialogProperties.default(title),
+    valueDisplayFormatter: (List<String>) -> String,
 ) {
 
     val pairs = entries.zip(entryValues)
@@ -29,11 +36,33 @@ fun PreferenceMultiChoice(
         description = description,
         onClick = { dialogVisible = true }
     ) {
-        Text(
-            text = pairs
-                .filter { it.second in values }
-                .joinToString(", ") { it.first }
-        )
+        val selectedEntries = pairs.filter { it.second in values }.map { it.first }
+
+        if (tooltipEnabled) {
+            PreferenceTooltip(
+                tooltip = {
+                    Column {
+                        selectedEntries.forEach { selectedEntry ->
+                            Text(
+                                text = selectedEntry,
+                                style = MaterialTheme.typography.bodyMedium,
+                            )
+                        }
+                    }
+                }
+            ) {
+                // TODO: extract this text composable somewhere, because it's used on many places
+                Text(
+                    text = valueDisplayFormatter(selectedEntries),
+                    style = MaterialTheme.typography.titleMedium,
+                )
+            }
+        } else {
+            Text(
+                text = valueDisplayFormatter(selectedEntries),
+                style = MaterialTheme.typography.titleMedium,
+            )
+        }
     }
 
     if (dialogVisible) {

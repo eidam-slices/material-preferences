@@ -12,6 +12,7 @@ fun PreferenceScope.multiChoice(
     defaultValue: Set<String>,
     entries: List<String>,
     entryValues: List<String>,
+    tooltipEnabled: Boolean = true,
     valueFormatter: (List<String>) -> String,
 ) = add {
     MultiChoicePreference.Custom(
@@ -21,6 +22,7 @@ fun PreferenceScope.multiChoice(
         defaultValue = defaultValue,
         entries = entries.map { Text(it)!! },
         entryValues = entryValues,
+        tooltipEnabled = tooltipEnabled,
         valueFormatter = valueFormatter,
     )
 }
@@ -33,6 +35,7 @@ fun PreferenceScope.multiChoice(
     defaultValue: Set<String>,
     @StringRes entries: List<Int>,
     entryValues: List<String>,
+    tooltipEnabled: Boolean = true,
     valueFormatter: (List<String>) -> String,
 ) = add {
     MultiChoicePreference.Custom(
@@ -42,6 +45,7 @@ fun PreferenceScope.multiChoice(
         defaultValue = defaultValue,
         entries = entries.map { Text(it)!! },
         entryValues = entryValues,
+        tooltipEnabled = tooltipEnabled,
         valueFormatter = valueFormatter,
     )
 }
@@ -93,6 +97,7 @@ fun <E: Enum<E>> PreferenceScope.enumMultiChoice(
     defaultValue: Set<E>,
     entries: List<String>,
     entryValues: List<E>,
+    tooltipEnabled: Boolean = true,
     valueFormatter: (List<String>) -> String,
 ) = add {
     MultiChoicePreference.Custom(
@@ -102,6 +107,7 @@ fun <E: Enum<E>> PreferenceScope.enumMultiChoice(
         defaultValue = defaultValue.map { it.name }.toSet(),
         entries = entries.map { Text(it)!! },
         entryValues = entryValues.map { it.name },
+        tooltipEnabled = tooltipEnabled,
         valueFormatter = valueFormatter
     )
 }
@@ -114,6 +120,7 @@ fun <E: Enum<E>> PreferenceScope.enumMultiChoice(
     defaultValue: Set<E>,
     @StringRes entries: List<Int>,
     entryValues: List<E>,
+    tooltipEnabled: Boolean = true,
     valueFormatter: (List<String>) -> String
 ) = add {
     MultiChoicePreference.Custom(
@@ -123,6 +130,7 @@ fun <E: Enum<E>> PreferenceScope.enumMultiChoice(
         defaultValue = defaultValue.map { it.name }.toSet(),
         entries = entries.map { Text(it)!! },
         entryValues = entryValues.map { it.name },
+        tooltipEnabled = tooltipEnabled,
         valueFormatter = valueFormatter
     )
 }
