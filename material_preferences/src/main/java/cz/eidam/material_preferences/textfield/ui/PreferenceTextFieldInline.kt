@@ -6,6 +6,7 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.widthIn
 import androidx.compose.foundation.text.BasicText
 import androidx.compose.foundation.text.BasicTextField
+import androidx.compose.material3.LocalContentColor
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -50,8 +51,9 @@ fun PreferenceTextFieldInline(
                 maxLines = 2,
                 onValueChange = onValueChange,
                 textStyle = MaterialTheme.typography.titleMedium.copy(
-                    textAlign = TextAlign.Center
-                ),
+                    textAlign = TextAlign.Center,
+                    color = LocalContentColor.current,
+                )
             )
         }
     }
