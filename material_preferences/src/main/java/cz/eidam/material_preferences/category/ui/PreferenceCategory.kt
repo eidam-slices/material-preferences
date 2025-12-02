@@ -22,7 +22,7 @@ fun PreferenceCategory(
     content: @Composable ColumnScope.() -> Unit
 ) {
 
-    val titleSet = title != null && title.isNotBlank()
+    val titleSet = title != null // && title.isNotBlank()
 
     val padding = if (titleSet) PaddingValues(start = 16.dp, end = 0.dp)
     else PaddingValues(all = 0.dp)
