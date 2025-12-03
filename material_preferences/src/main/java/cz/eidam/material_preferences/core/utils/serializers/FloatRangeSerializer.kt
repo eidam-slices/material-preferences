@@ -9,7 +9,7 @@ internal object FloatRangeSerializer {
             start..endInclusive
         }
     )
-    private const val SEPARATOR = "-"
+    private const val SEPARATOR = "–"
 
     internal fun serializeFloatRange(
         range: ClosedFloatingPointRange<Float>
@@ -20,6 +20,8 @@ internal object FloatRangeSerializer {
     internal fun deserializeFloatRange(serialized: String): ClosedFloatingPointRange<Float>? {
         val (start, endInclusive) = serialized.split(SEPARATOR)
             .map { it.toFloatOrNull() ?: return null }
+            .takeIf { it.size == 2 } ?: return null
+
         return start..endInclusive
     }
 }
