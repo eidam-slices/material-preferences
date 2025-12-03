@@ -42,7 +42,7 @@ fun PreferenceSlider(
     if (dialogVisible) {
         SliderDialog(
             onDismissRequest = { dialogVisible = false },
-            value = value,
+            value = value.coerceIn(valueRange),
             onValueChange = onValueChange,
             valueRange = valueRange,
             step = step,

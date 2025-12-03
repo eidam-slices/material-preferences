@@ -9,6 +9,7 @@ import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import cz.eidam.material_preferences.generic.ui.PreferenceRow
 import cz.eidam.material_preferences.core.model.PreferenceDialogProperties
+import cz.eidam.material_preferences.core.utils.coerceIn
 
 @Composable
 fun PreferenceRangeSlider(
@@ -39,7 +40,7 @@ fun PreferenceRangeSlider(
     if (dialogVisible) {
         RangeSliderDialog(
             onDismissRequest = { dialogVisible = false },
-            value = value,
+            value = value.coerceIn(valueRange),
             onValueChange = onValueChange,
             valueRange = valueRange,
             step = step,
