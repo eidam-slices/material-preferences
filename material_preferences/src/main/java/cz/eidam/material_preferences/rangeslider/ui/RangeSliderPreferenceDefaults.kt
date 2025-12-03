@@ -8,7 +8,7 @@ object RangeSliderPreferenceDefaults {
         val formatter = createSliderNumberFormatter(step)
 
         return { value ->
-            formatter.format(value.start) + " - " + formatter.format(value.endInclusive) + " " + unit
+            "${formatter.format(value.start)} – ${formatter.format(value.endInclusive)} $unit"
         }
     }
 }
