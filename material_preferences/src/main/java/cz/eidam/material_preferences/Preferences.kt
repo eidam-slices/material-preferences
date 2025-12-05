@@ -1,7 +1,6 @@
 package cz.eidam.material_preferences
 
 import android.content.Context
-import android.util.Log
 import androidx.compose.runtime.Composable
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
@@ -23,18 +22,10 @@ import cz.eidam.material_preferences.core.utils.setString
 import cz.eidam.material_preferences.core.utils.setStringSet
 import kotlinx.coroutines.flow.Flow
 
-object Preferences {
+class Preferences(val dataStore: DataStore<Preferences>) {
 
-    private lateinit var context: Context
+    constructor(context: Context): this(context.dataStore)
 
-    val dataStore: DataStore<Preferences> by lazy {
-        context.dataStore
-    }
-
-    fun init(context: Context) {
-        this.context = context
-        Log.d("Preferences", "singletone initialized")
-    }
 
     //*region———— COLLECT AS STATE FUNCTIONS ————————————————————————————
     @Composable
