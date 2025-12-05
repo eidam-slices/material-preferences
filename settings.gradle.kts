@@ -22,4 +22,5 @@ dependencyResolutionManagement {
 rootProject.name = "Material Preferences"
 include(":material_preferences")
 include(":demo")
+include(":demo_koin")
 include(":demo_shared")
