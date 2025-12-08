@@ -57,9 +57,6 @@ dependencies {
     implementation(libs.androidx.compose.ui)
     implementation(libs.androidx.compose.material3)
     implementation(libs.androidx.compose.ui.tooling)
-    // temporary icons dependency:
-    implementation("androidx.compose.material:material-icons-extended:1.7.8")
-
     // datastore:
     implementation(libs.androidx.datastore.preferences)
 }

@@ -4,8 +4,6 @@ import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.rounded.ArrowDropDown
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
@@ -15,6 +13,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.rotate
 import androidx.compose.ui.unit.dp
+import cz.eidam.material_preferences.core.ui.Icons
 
 @Composable
 fun CategoryTitle(
@@ -44,7 +43,7 @@ fun CategoryTitle(
                 modifier = Modifier.rotate(rotation),
                 // ? TODO: add support for different icon for expanded/collapsed state,
                 //  if its possible to animate it
-                imageVector = Icons.Rounded.ArrowDropDown,
+                imageVector = Icons.ArrowDropDown,
                 contentDescription = "TODO", // TODO: add content description
             )
         }
