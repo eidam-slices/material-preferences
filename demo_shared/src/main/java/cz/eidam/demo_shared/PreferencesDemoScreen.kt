@@ -45,45 +45,51 @@ fun PreferencesDemoScreen(
                 defaultValue = true,
             )
 
-            slider(
-                key = PreferenceKeys.EXAMPLE_SLIDER,
-                title = "Example Slider",
-                description = "A simple example of a slider preference",
-                defaultValue = -25f,
-                valueRange = 0f..100f,
-                step = 12.5f,
-                // TODO: make it a optional parameter with default value
-                unit = "%"
-            )
+            category("Example Sliders Category") {
+                slider(
+                    key = PreferenceKeys.EXAMPLE_SLIDER,
+                    title = "Example Slider",
+                    description = "A simple example of a slider preference",
+                    defaultValue = -25f,
+                    valueRange = 0f..100f,
+                    step = 12.5f,
+                    // TODO: make it a optional parameter with default value
+                    unit = "%"
+                )
 
-            rangeSlider(
-                key = PreferenceKeys.EXAMPLE_RANGE_SLIDER,
-                title = "Example Range Slider",
-                description = "A simple example of a range slider preference",
-                defaultValue = 0f..100f,
-                valueRange = 0f..300f,
-                step = 10f,
-                unit = "km",
-            )
+                rangeSlider(
+                    key = PreferenceKeys.EXAMPLE_RANGE_SLIDER,
+                    title = "Example Range Slider",
+                    description = "A simple example of a range slider preference",
+                    defaultValue = 0f..100f,
+                    valueRange = 0f..300f,
+                    step = 10f,
+                    unit = "km",
+                )
+            }
 
-            val entryValues = List(4) { "value${it + 1}" }
-            choice(
-                key = PreferenceKeys.EXAMPLE_CHOICE,
-                title = "Example Choice",
-                description = "A simple example of a choice preference",
-                defaultValue = entryValues.first(),
-                entries = List(4) { "Option ${it + 1}" },
-                entryValues = entryValues,
-            )
+            collapsibleCategory("Example Choices Collapsible Category") {
 
-            multiChoice(
-                key = PreferenceKeys.EXAMPLE_MULTI_CHOICE,
-                title = "Example Multi Choice",
-                description = "A simple example of a multi choice preference",
-                defaultValue = entryValues.take(2).toSet(),
-                entries = List(4) { "Option ${it + 1}" },
-                entryValues = entryValues,
-            )
+                val entryValues = List(4) { "value${it + 1}" }
+
+                choice(
+                    key = PreferenceKeys.EXAMPLE_CHOICE,
+                    title = "Example Choice",
+                    description = "A simple example of a choice preference",
+                    defaultValue = entryValues.first(),
+                    entries = List(4) { "Option ${it + 1}" },
+                    entryValues = entryValues,
+                )
+
+                multiChoice(
+                    key = PreferenceKeys.EXAMPLE_MULTI_CHOICE,
+                    title = "Example Multi Choice",
+                    description = "A simple example of a multi choice preference",
+                    defaultValue = entryValues.take(2).toSet(),
+                    entries = List(4) { "Option ${it + 1}" },
+                    entryValues = entryValues,
+                )
+            }
 
             textField(
                 key = PreferenceKeys.EXAMPLE_TEXT_FIELD,
