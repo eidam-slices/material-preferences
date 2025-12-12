@@ -6,6 +6,7 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.text.BasicTextField
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.derivedStateOf
@@ -14,9 +15,12 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.SolidColor
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.platform.LocalSoftwareKeyboardController
+import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.rememberTextMeasurer
@@ -30,7 +34,10 @@ fun SliderTextField(
     valueRange: ClosedFloatingPointRange<Float>,
     modifier: Modifier = Modifier,
     transform: (Float) -> String,
+    textColor: Color = MaterialTheme.colorScheme.onSurfaceVariant,
+    cursorColor: Color = MaterialTheme.colorScheme.primary,
 ) {
+
 
     // keyboard and focus controllers
     val keyboardController = LocalSoftwareKeyboardController.current
@@ -54,6 +61,7 @@ fun SliderTextField(
 
     var text by remember { mutableStateOf(transform(value)) }
 
+
     LaunchedEffect(value) {
         if (formattingEnabled) {
             text = transform(value)
@@ -61,7 +69,6 @@ fun SliderTextField(
             formattingEnabled = true
         }
     }
-
     val fieldWidth = with(LocalDensity.current) {
         measurer.measure(text).size.width.toDp()
     }
@@ -96,6 +103,8 @@ fun SliderTextField(
                 text = transform(value)
                 formattingEnabled = true
             },
+            textStyle = TextStyle(color = textColor),
+            cursorBrush = SolidColor(cursorColor),
         )
     }
 
