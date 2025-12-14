@@ -8,4 +8,6 @@ object PreferenceKeys {
     const val EXAMPLE_MULTI_CHOICE = "example_multi_choice"
     const val EXAMPLE_TEXT_FIELD = "example_text_field"
     const val EXAMPLE_INLINE_TEXT_FIELD = "example_inline_text_field"
+    const val EXAMPLE_DEPENDENCY_CHOICE = "example_dependency_choice"
+    const val EXAMPLE_DEPENDENT_CHOICE = "example_dependent_choice"
 }
