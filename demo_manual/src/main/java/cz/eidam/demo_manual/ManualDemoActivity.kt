@@ -14,6 +14,8 @@ import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import cz.eidam.demo_shared.DependentPreferencesDemoScreen
+import cz.eidam.demo_shared.DependentPreferencesScreenKey
 import cz.eidam.demo_shared.PreferencesDemoScreen
 import cz.eidam.demo_shared.PreferencesScreenKey
 import cz.eidam.demo_shared.ReadingPreferencesDemoScreen
@@ -40,13 +42,12 @@ class ManualDemoActivity: ComponentActivity() {
                         .fillMaxSize()
                         .padding(innerPadding)
 
+
                     when (backStack.lastOrNull()) {
                         PreferencesScreenKey -> {
                             PreferencesDemoScreen(
                                 modifier = modifier,
-                                onGoToReading = {
-                                    backStack.add(ReadingPreferencesScreenKey)
-                                }
+                                onNavigate = { backStack.add(it) }
                             )
                         }
 
@@ -54,9 +55,14 @@ class ManualDemoActivity: ComponentActivity() {
                             ReadingPreferencesDemoScreen(
                                 preferences = preferences,
                                 modifier = modifier,
-                                onGoBack = {
-                                    backStack.removeLastOrNull()
-                                }
+                                onGoBack = { backStack.removeLastOrNull() }
+                            )
+                        }
+
+                        DependentPreferencesScreenKey -> {
+                            DependentPreferencesDemoScreen(
+                                modifier = modifier,
+                                onGoBack = { backStack.removeLastOrNull() }
                             )
                         }
 

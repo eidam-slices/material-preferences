@@ -41,9 +41,7 @@ class KoinDemoActivity: ComponentActivity() {
                         PreferencesScreenKey -> {
                             PreferencesDemoScreen(
                                 modifier = modifier,
-                                onGoToReading = {
-                                    backStack.add(ReadingPreferencesScreenKey)
-                                }
+                                onNavigate = { backStack.add(it) }
                             )
                         }
 

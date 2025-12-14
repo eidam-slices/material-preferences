@@ -1,6 +1,10 @@
 package cz.eidam.demo_shared
 
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.IntrinsicSize
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
@@ -19,7 +23,7 @@ const val PreferencesScreenKey = "preferences_demo"
 @Composable
 fun PreferencesDemoScreen(
     modifier: Modifier = Modifier,
-    onGoToReading: () -> Unit = { },
+    onNavigate: (String) -> Unit = { }
 ) {
 
     Column(
@@ -108,11 +112,28 @@ fun PreferencesDemoScreen(
         }
 
 
-        Button(
-            modifier = Modifier.padding(16.dp),
-            onClick = onGoToReading
+        Row(
+            modifier = Modifier
+                .fillMaxWidth()
+                .height(IntrinsicSize.Min)
         ) {
-            Text(text = "Go to Reading Values")
+            val padding = 4.dp
+            Button(
+                modifier = Modifier
+                    .weight(1f)
+                    .padding(horizontal = padding),
+                onClick = { onNavigate(ReadingPreferencesScreenKey) }
+            ) {
+                Text(text = "Go to Reading Values")
+            }
+            Button(
+                modifier = Modifier
+                    .weight(1.1f)
+                    .padding(horizontal = padding),
+                onClick = { onNavigate(DependentPreferencesScreenKey) }
+            ) {
+                Text(text = "Dependent Preferences")
+            }
         }
     }
 
