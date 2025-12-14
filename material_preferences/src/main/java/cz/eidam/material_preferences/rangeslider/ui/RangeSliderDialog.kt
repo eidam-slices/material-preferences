@@ -1,7 +1,6 @@
 package cz.eidam.material_preferences.rangeslider.ui
 
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.text.BasicText
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.RangeSlider
 import androidx.compose.material3.Text
@@ -54,7 +53,7 @@ fun RangeSliderDialog(
         text = {
             Column {
                 // ? TODO: extract this to composable ?
-                BasicText(
+                Text(
                     text = transform(internal),
                 )
                 RangeSlider(

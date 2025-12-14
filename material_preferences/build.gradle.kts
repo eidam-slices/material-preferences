@@ -4,6 +4,7 @@ plugins {
     alias(libs.plugins.android.library)
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.compose)
+    id("maven-publish")
 }
 
 android {
@@ -59,4 +60,21 @@ dependencies {
     implementation(libs.androidx.compose.ui.tooling)
     // datastore:
     implementation(libs.androidx.datastore.preferences)
+}
+
+group = "cz.eidam.material-preferences"
+version = "0.1.0"
+
+publishing {
+    publications {
+        create<MavenPublication>("release") {
+            afterEvaluate {
+                from(components["release"])
+            }
+            groupId = project.group.toString()
+            artifactId = "material-preferences"
+            version = project.version.toString()
+        }
+
+    }
 }
