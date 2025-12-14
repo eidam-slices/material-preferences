@@ -7,6 +7,7 @@ import androidx.datastore.preferences.core.Preferences
 import cz.eidam.material_preferences.category.model.PreferenceCategory
 import cz.eidam.material_preferences.choice.model.ChoicePreference
 import cz.eidam.material_preferences.choice.ui.DataStorePreferenceChoice
+import cz.eidam.material_preferences.generic.model.DependentPreference
 import cz.eidam.material_preferences.generic.model.PreferenceRow
 import cz.eidam.material_preferences.multichoice.model.MultiChoicePreference
 import cz.eidam.material_preferences.multichoice.ui.DataStorePreferenceMultiChoice
@@ -32,6 +33,14 @@ internal fun DrawPreferenceRow(
     when (val preference = preference) {
         is PreferenceCategory -> {
             DrawPreferenceCategory(preference, dataStore)
+        }
+
+        is DependentPreference<*> -> {
+            Log.d("DrawPreferenceRow", "Drawing DependentPreference with key='${preference.dependencyKey}'")
+            DrawDependentPreference(
+                dependentPreference = preference,
+                dataStore = dataStore
+            )
         }
 
         is SwitchPreference -> {
@@ -140,6 +149,9 @@ internal fun DrawPreferenceRow(
             )
         }
 
-        else -> Log.e("DrawPreferenceRow", "Failed to draw PreferenceRow. Unsupported PreferenceRow type: $preference")
+        else -> Log.e(
+            "DrawPreferenceRow",
+            "Failed to draw PreferenceRow. Unsupported PreferenceRow type: $preference"
+        )
     }
 }
