@@ -13,9 +13,12 @@ import cz.eidam.material_preferences.core.utils.dataStore
 fun Preferences(
     modifier: Modifier = Modifier,
     dataStore: DataStore<Preferences> = LocalContext.current.dataStore,
-    content: PreferenceScope.() -> Unit
+    content: @Composable PreferenceScope.() -> Unit
 ) {
-    val scope = PreferenceScope().apply(content)
+    val scope = PreferenceScope()
+    scope.clear()
+    scope.content()
+
     Column(modifier) {
         scope.all.forEach { preference ->
             DrawPreferenceRow(preference, dataStore)

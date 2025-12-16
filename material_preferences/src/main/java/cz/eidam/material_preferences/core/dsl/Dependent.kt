@@ -1,5 +1,6 @@
 package cz.eidam.material_preferences.core.dsl
 
+import androidx.compose.runtime.Composable
 import cz.eidam.material_preferences.generic.model.DependentPreference
 
 fun <T> PreferenceScope.dependent(
@@ -7,7 +8,7 @@ fun <T> PreferenceScope.dependent(
     defaultValue: T,
     serialize: (T) -> String,
     deserialize: (String) -> T,
-    content: PreferenceScope.(T) -> Unit,
+    content: @Composable PreferenceScope.(T) -> Unit,
 ) = add {
     DependentPreference(
         dependencyKey = dependencyKey,
