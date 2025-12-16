@@ -116,9 +116,8 @@ internal fun DrawPreferenceRow(
                 key = preference.key,
                 title = preference.title,
                 description = preference.description,
-                entries = preference.entries,
-                entryValues = preference.entryValues,
                 defaultValue = preference.defaultValue,
+                choices = preference.choices,
                 tooltipEnabled = when (val preference: MultiChoicePreference = preference) {
                     is MultiChoicePreference.Custom -> preference.tooltipEnabled
                     is MultiChoicePreference.Default -> true

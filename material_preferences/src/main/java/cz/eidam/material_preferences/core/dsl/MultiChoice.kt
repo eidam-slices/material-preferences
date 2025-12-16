@@ -1,8 +1,9 @@
 package cz.eidam.material_preferences.core.dsl
 
+import cz.eidam.material_preferences.core.model.ChoiceItem
 import cz.eidam.material_preferences.multichoice.model.MultiChoicePreference
 
-// String title / String type / Custom Overload
+// String title / String type / Lists / Custom Overload
 fun PreferenceScope.multiChoice(
     key: String,
     title: String,
@@ -18,14 +19,15 @@ fun PreferenceScope.multiChoice(
         title = title,
         description = description,
         defaultValue = defaultValue,
-        entries = entries,
-        entryValues = entryValues,
+        choices = entries.zip(entryValues).map { (label, value) ->
+            ChoiceItem(label, value)
+        },
         tooltipEnabled = tooltipEnabled,
         valueFormatter = valueFormatter,
     )
 }
 
-// String title / String type / Default Overload
+// String title / String type / Lists / Default Overload
 fun PreferenceScope.multiChoice(
     key: String,
     title: String,
@@ -39,12 +41,13 @@ fun PreferenceScope.multiChoice(
         title = title,
         description = description,
         defaultValue = defaultValue,
-        entries = entries,
-        entryValues = entryValues,
+        choices = entries.zip(entryValues).map { (label, value) ->
+            ChoiceItem(label, value)
+        },
     )
 }
 
-// String / Enum / Custom Overload
+// String / Enum / Lists / Custom Overload
 fun <E: Enum<E>> PreferenceScope.enumMultiChoice(
     key: String,
     title: String,
@@ -60,14 +63,15 @@ fun <E: Enum<E>> PreferenceScope.enumMultiChoice(
         title = title,
         description = description,
         defaultValue = defaultValue.map { it.name }.toSet(),
-        entries = entries,
-        entryValues = entryValues.map { it.name },
+        choices = entries.zip(entryValues).map { (label, value) ->
+            ChoiceItem(label, value.name)
+        },
         tooltipEnabled = tooltipEnabled,
         valueFormatter = valueFormatter
     )
 }
 
-// String / Enum / Default Overload
+// String / Enum / Lists / Default Overload
 fun <E: Enum<E>> PreferenceScope.enumMultiChoice(
     key: String,
     title: String,
@@ -81,7 +85,8 @@ fun <E: Enum<E>> PreferenceScope.enumMultiChoice(
         title = title,
         description = description,
         defaultValue = defaultValue.map { it.name }.toSet(),
-        entries = entries,
-        entryValues = entryValues.map { it.name },
+        choices = entries.zip(entryValues).map { (label, value) ->
+            ChoiceItem(label, value.name)
+        },
     )
 }
