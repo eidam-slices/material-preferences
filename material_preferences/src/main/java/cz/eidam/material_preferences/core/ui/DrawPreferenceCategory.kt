@@ -8,22 +8,29 @@ import androidx.compose.runtime.setValue
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
 import cz.eidam.material_preferences.category.model.PreferenceCategory
+import cz.eidam.material_preferences.core.dsl.PreferenceScope
 
 @Composable
 internal fun DrawPreferenceCategory(
     category: PreferenceCategory,
     dataStore: DataStore<Preferences>
 ) {
-    var expanded by rememberSaveable { mutableStateOf(true) }
+    var expanded by rememberSaveable(category) { mutableStateOf(true) }
+
+    val scope = PreferenceScope()
 
     cz.eidam.material_preferences.category.ui.PreferenceCategory(
-        title = category.title?.value(),
+        title = category.title,
         onExpandedChange = if (category.collapsible) {
             { expanded = it }
         } else null,
         expanded = if (category.collapsible) expanded else null,
     ) {
-        category.all.forEach { preference ->
+
+        scope.clear()
+        category.content(scope)
+
+        scope.all.forEach { preference ->
             DrawPreferenceRow(preference, dataStore)
         }
     }

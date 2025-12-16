@@ -10,4 +10,6 @@ open class PreferenceScope {
 
     // ? TODO: make internal ?
     fun add(row: () -> PreferenceRow) { _all.add(row()) }
+
+    fun clear() { _all.clear() }
 }

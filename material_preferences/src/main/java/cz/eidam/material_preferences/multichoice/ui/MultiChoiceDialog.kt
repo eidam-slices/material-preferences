@@ -23,6 +23,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
+import cz.eidam.material_preferences.core.model.ChoiceItem
 import cz.eidam.material_preferences.core.model.PreferenceDialogProperties
 
 @Composable
@@ -30,7 +31,7 @@ fun MultiChoiceDialog(
     onDismissRequest: () -> Unit,
     values: Set<String>,
     onValueChange: (Set<String>) -> Unit,
-    pairs: List<Pair<String, String>>,
+    choices: List<ChoiceItem<String>>,
     properties: PreferenceDialogProperties,
     modifier: Modifier = Modifier,
 ) {
@@ -41,9 +42,9 @@ fun MultiChoiceDialog(
         modifier = modifier.width(IntrinsicSize.Max), title = { Text(properties.title) },
         text = {
             Column {
-                pairs.forEach { (entry, entryValue) ->
+                choices.forEach { (label, value) ->
 
-                    val checked = internal.contains(entryValue)
+                    val checked = internal.contains(value)
 
 
                     val interactionSource = remember { MutableInteractionSource() }
@@ -54,8 +55,8 @@ fun MultiChoiceDialog(
                                 indication = null,
                                 interactionSource = interactionSource,
                                 onClick = {
-                                    internal = if (checked) internal - entryValue
-                                    else internal + entryValue
+                                    internal = if (checked) internal - value
+                                    else internal + value
                                 }
                             ),
                         verticalAlignment = Alignment.CenterVertically
@@ -64,13 +65,13 @@ fun MultiChoiceDialog(
                             interactionSource = interactionSource,
                             checked = checked,
                             onCheckedChange = {
-                                internal = if (checked) internal - entryValue
-                                else internal + entryValue
+                                internal = if (checked) internal - value
+                                else internal + value
                             }
                         )
 
                         Text(
-                            text = entry,
+                            text = label,
                             style = MaterialTheme.typography.bodyLarge
                         )
 
@@ -97,8 +98,6 @@ fun MultiChoiceDialog(
             }
         }
     )
-
-
 }
 
 @Preview
@@ -116,7 +115,9 @@ private fun Preview() {
         onValueChange = {
             values = it
         },
-        pairs = entries.zip(entryValues),
+        choices = entries.zip(entryValues).map {
+            ChoiceItem(label = it.first, value = it.second)
+        },
         properties = PreferenceDialogProperties(
             title = "Hovno nadpis",
             confirmText = stringResource(R.string.ok),

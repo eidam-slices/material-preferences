@@ -1,10 +1,9 @@
 package cz.eidam.material_preferences.core.dsl
 
-import androidx.annotation.StringRes
 import cz.eidam.material_preferences.choice.model.ChoicePreference
-import cz.eidam.material_preferences.core.model.Text
+import cz.eidam.material_preferences.core.model.ChoiceItem
 
-// String / String Overload
+// String / String / Lists Overload
 fun PreferenceScope.choice(
     key: String,
     title: String,
@@ -15,34 +14,35 @@ fun PreferenceScope.choice(
 ) = add {
     ChoicePreference(
         key = key,
-        title = Text(title)!!,
-        description = Text(description),
+        title = title,
+        description = description,
         defaultValue = defaultValue,
-        entries = entries.map { Text(it)!! },
-        entryValues = entryValues
+        choices = entries.zip(entryValues).map { (label, value) ->
+            ChoiceItem(label, value)
+        }
     )
 }
 
-// String Resource / String Overload
+// String / String / Pairs Overload
 fun PreferenceScope.choice(
     key: String,
-    @StringRes title: Int,
-    @StringRes description: Int? = null,
+    title: String,
+    description: String? = null,
     defaultValue: String,
-    @StringRes entries: List<Int>,
-    entryValues: List<String>,
+    choices: List<Pair<String, String>>,
 ) = add {
     ChoicePreference(
         key = key,
-        title = Text(title)!!,
-        description = Text(description),
+        title = title,
+        description = description,
         defaultValue = defaultValue,
-        entries = entries.map { Text(it)!! },
-        entryValues = entryValues
+        choices = choices.map { (label, value) ->
+            ChoiceItem(label, value)
+        }
     )
 }
 
-// String / Enum Overload
+// String / Enum / Lists Overload
 fun <E: Enum<E>> PreferenceScope.enumChoice(
     key: String,
     title: String,
@@ -53,29 +53,31 @@ fun <E: Enum<E>> PreferenceScope.enumChoice(
 ) = add {
     ChoicePreference(
         key = key,
-        title = Text(title)!!,
-        description = Text(description),
+        title = title,
+        description = description,
         defaultValue = defaultValue.name,
-        entries = entries.map { Text(it)!! },
-        entryValues = entryValues.map { it.name }
+        choices = entries.zip(entryValues).map { (label, value) ->
+            ChoiceItem(label, value.name)
+        }
     )
 }
 
-// String Resource / Enum Overload
+// String / Enum / Pairs Overload
 fun <E: Enum<E>> PreferenceScope.enumChoice(
     key: String,
-    @StringRes title: Int,
-    @StringRes description: Int? = null,
+    title: String,
+    description: String? = null,
     defaultValue: E,
-    @StringRes entries: List<Int>,
-    entryValues: List<E>,
+    choices: List<Pair<String, E>>,
 ) = add {
     ChoicePreference(
         key = key,
-        title = Text(title)!!,
-        description = Text(description),
+        title = title,
+        description = description,
         defaultValue = defaultValue.name,
-        entries = entries.map { Text(it)!! },
-        entryValues = entryValues.map { it.name }
+        choices = choices.map { (label, value) ->
+            ChoiceItem(label, value.name)
+        }
+
     )
 }

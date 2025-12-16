@@ -1,5 +1,6 @@
 package cz.eidam.material_preferences.generic.model
 
+import androidx.compose.runtime.Composable
 import cz.eidam.material_preferences.core.dsl.PreferenceScope
 
 data class DependentPreference<T>(
@@ -7,5 +8,5 @@ data class DependentPreference<T>(
     val defaultValue: T,
     val serialize: (T) -> String,
     val deserialize: (String) -> T,
-    val content: PreferenceScope.(T) -> Unit
-): PreferenceRow, PreferenceScope()
+    val content: @Composable PreferenceScope.(T) -> Unit
+): PreferenceRow

@@ -46,8 +46,8 @@ internal fun DrawPreferenceRow(
         is SwitchPreference -> {
             DataStorePreferenceSwitch(
                 key = preference.key,
-                title = preference.title.value(),
-                description = preference.description?.value(),
+                title = preference.title,
+                description = preference.description,
                 defaultValue = preference.defaultValue,
                 dataStore = dataStore
             )
@@ -64,8 +64,8 @@ internal fun DrawPreferenceRow(
 
             DataStorePreferenceSlider(
                 key = preference.key,
-                title = preference.title.value(),
-                description = preference.description?.value(),
+                title = preference.title,
+                description = preference.description,
                 defaultValue = preference.defaultValue,
                 valueRange = preference.valueRange,
                 step = preference.step,
@@ -85,8 +85,8 @@ internal fun DrawPreferenceRow(
 
             DataStorePreferenceRangeSlider(
                 key = preference.key,
-                title = preference.title.value(),
-                description = preference.description?.value(),
+                title = preference.title,
+                description = preference.description,
                 defaultValue = preference.defaultValue,
                 valueRange = preference.valueRange,
                 step = preference.step,
@@ -98,10 +98,9 @@ internal fun DrawPreferenceRow(
         is ChoicePreference -> {
             DataStorePreferenceChoice(
                 key = preference.key,
-                title = preference.title.value(),
-                description = preference.description?.value(),
-                entries = preference.entries.map { it.value() },
-                entryValues = preference.entryValues,
+                title = preference.title,
+                description = preference.description,
+                choices = preference.choices,
                 defaultValue = preference.defaultValue,
                 dataStore = dataStore
             )
@@ -115,11 +114,10 @@ internal fun DrawPreferenceRow(
 
             DataStorePreferenceMultiChoice(
                 key = preference.key,
-                title = preference.title.value(),
-                description = preference.description?.value(),
-                entries = preference.entries.map { it.value() },
-                entryValues = preference.entryValues,
+                title = preference.title,
+                description = preference.description,
                 defaultValue = preference.defaultValue,
+                choices = preference.choices,
                 tooltipEnabled = when (val preference: MultiChoicePreference = preference) {
                     is MultiChoicePreference.Custom -> preference.tooltipEnabled
                     is MultiChoicePreference.Default -> true
@@ -132,8 +130,8 @@ internal fun DrawPreferenceRow(
         is TextFieldPreference.Modal -> {
             DataStorePreferenceTextField(
                 key = preference.key,
-                title = preference.title.value(),
-                description = preference.description?.value(),
+                title = preference.title,
+                description = preference.description,
                 defaultValue = preference.defaultValue,
                 dataStore = dataStore
             )
@@ -142,8 +140,8 @@ internal fun DrawPreferenceRow(
         is TextFieldPreference.Inline -> {
             DataStorePreferenceTextFieldInline(
                 key = preference.key,
-                title = preference.title.value(),
-                description = preference.description?.value(),
+                title = preference.title,
+                description = preference.description,
                 defaultValue = preference.defaultValue,
                 dataStore = dataStore
             )

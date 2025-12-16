@@ -26,13 +26,11 @@ fun <T> DrawDependentPreference(
         }.distinctUntilChanged()
     }.collectAsState(dependentPreference.defaultValue)
 
-    val localScope = remember(value) {
-        PreferenceScope().apply {
-            dependentPreference.content.invoke(this, value)
-        }
-    }
+    val scope = PreferenceScope()
+    scope.clear()
+    dependentPreference.content.invoke(scope, value)
 
-    localScope.all.forEach { preference ->
+    scope.all.forEach { preference ->
         DrawPreferenceRow(preference, dataStore)
     }
 }

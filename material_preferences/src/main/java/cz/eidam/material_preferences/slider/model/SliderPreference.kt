@@ -1,6 +1,5 @@
 package cz.eidam.material_preferences.slider.model
 
-import cz.eidam.material_preferences.core.model.Text
 import cz.eidam.material_preferences.generic.model.Preference
 
 internal sealed class SliderPreference: Preference() {
@@ -11,8 +10,8 @@ internal sealed class SliderPreference: Preference() {
 
     data class Custom(
         override val key: String,
-        override val title: Text,
-        override val description: Text?,
+        override val title: String,
+        override val description: String?,
         override val defaultValue: Float,
         override val valueRange: ClosedFloatingPointRange<Float>,
         override val step: Float,
@@ -21,8 +20,8 @@ internal sealed class SliderPreference: Preference() {
 
     data class WithUnit(
         override val key: String,
-        override val title: Text,
-        override val description: Text?,
+        override val title: String,
+        override val description: String?,
         override val defaultValue: Float,
         override val valueRange: ClosedFloatingPointRange<Float>,
         override val step: Float,

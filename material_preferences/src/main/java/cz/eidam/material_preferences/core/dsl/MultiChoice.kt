@@ -1,10 +1,9 @@
 package cz.eidam.material_preferences.core.dsl
 
-import androidx.annotation.StringRes
-import cz.eidam.material_preferences.core.model.Text
+import cz.eidam.material_preferences.core.model.ChoiceItem
 import cz.eidam.material_preferences.multichoice.model.MultiChoicePreference
 
-// String title / String type / Custom Overload
+// String title / String type / Lists / Custom Overload
 fun PreferenceScope.multiChoice(
     key: String,
     title: String,
@@ -17,40 +16,41 @@ fun PreferenceScope.multiChoice(
 ) = add {
     MultiChoicePreference.Custom(
         key = key,
-        title = Text(title)!!,
-        description = Text(description),
+        title = title,
+        description = description,
         defaultValue = defaultValue,
-        entries = entries.map { Text(it)!! },
-        entryValues = entryValues,
+        choices = entries.zip(entryValues).map { (label, value) ->
+            ChoiceItem(label, value)
+        },
         tooltipEnabled = tooltipEnabled,
         valueFormatter = valueFormatter,
     )
 }
 
-// String Resource title / String type / Custom Overload
+// String title / String type / Pairs / Custom Overload
 fun PreferenceScope.multiChoice(
     key: String,
-    @StringRes title: Int,
-    @StringRes description: Int? = null,
+    title: String,
+    description: String? = null,
     defaultValue: Set<String>,
-    @StringRes entries: List<Int>,
-    entryValues: List<String>,
+    choices: List<Pair<String, String>>,
     tooltipEnabled: Boolean = true,
     valueFormatter: (List<String>) -> String,
 ) = add {
     MultiChoicePreference.Custom(
         key = key,
-        title = Text(title)!!,
-        description = Text(description),
+        title = title,
+        description = description,
         defaultValue = defaultValue,
-        entries = entries.map { Text(it)!! },
-        entryValues = entryValues,
+        choices = choices.map { (label, value) ->
+            ChoiceItem(label, value)
+        },
         tooltipEnabled = tooltipEnabled,
         valueFormatter = valueFormatter,
     )
 }
 
-// String title / String type / Default Overload
+// String title / String type / Lists / Default Overload
 fun PreferenceScope.multiChoice(
     key: String,
     title: String,
@@ -61,35 +61,35 @@ fun PreferenceScope.multiChoice(
 ) = add {
     MultiChoicePreference.Default(
         key = key,
-        title = Text(title)!!,
-        description = Text(description),
+        title = title,
+        description = description,
         defaultValue = defaultValue,
-        entries = entries.map { Text(it)!! },
-        entryValues = entryValues,
+        choices = entries.zip(entryValues).map { (label, value) ->
+            ChoiceItem(label, value)
+        },
     )
 }
 
-// String Resource title / String type / Default Overload
+// String title / String type / Pairs / Default Overload
 fun PreferenceScope.multiChoice(
     key: String,
-    @StringRes title: Int,
-    @StringRes description: Int? = null,
+    title: String,
+    description: String? = null,
     defaultValue: Set<String>,
-    @StringRes entries: List<Int>,
-    entryValues: List<String>,
+    choices: List<Pair<String, String>>,
 ) = add {
     MultiChoicePreference.Default(
         key = key,
-        title = Text(title)!!,
-        description = Text(description),
+        title = title,
+        description = description,
         defaultValue = defaultValue,
-        entries = entries.map { Text(it)!! },
-        entryValues = entryValues,
+        choices = choices.map { (label, value) ->
+            ChoiceItem(label, value)
+        }
     )
 }
 
-
-// String / Enum / Custom Overload
+// String / Enum / Lists / Custom Overload
 fun <E: Enum<E>> PreferenceScope.enumMultiChoice(
     key: String,
     title: String,
@@ -102,40 +102,41 @@ fun <E: Enum<E>> PreferenceScope.enumMultiChoice(
 ) = add {
     MultiChoicePreference.Custom(
         key = key,
-        title = Text(title)!!,
-        description = Text(description),
+        title = title,
+        description = description,
         defaultValue = defaultValue.map { it.name }.toSet(),
-        entries = entries.map { Text(it)!! },
-        entryValues = entryValues.map { it.name },
+        choices = entries.zip(entryValues).map { (label, value) ->
+            ChoiceItem(label, value.name)
+        },
         tooltipEnabled = tooltipEnabled,
         valueFormatter = valueFormatter
     )
 }
 
-// String Resource / Enum / Custom Overload
+// String / Enum / Pairs / Custom Overload
 fun <E: Enum<E>> PreferenceScope.enumMultiChoice(
     key: String,
-    @StringRes title: Int,
-    @StringRes description: Int? = null,
+    title: String,
+    description: String? = null,
     defaultValue: Set<E>,
-    @StringRes entries: List<Int>,
-    entryValues: List<E>,
+    choices: List<Pair<String, E>>,
     tooltipEnabled: Boolean = true,
-    valueFormatter: (List<String>) -> String
+    valueFormatter: (List<String>) -> String,
 ) = add {
     MultiChoicePreference.Custom(
         key = key,
-        title = Text(title)!!,
-        description = Text(description),
+        title = title,
+        description = description,
         defaultValue = defaultValue.map { it.name }.toSet(),
-        entries = entries.map { Text(it)!! },
-        entryValues = entryValues.map { it.name },
+        choices = choices.map { (label, value) ->
+            ChoiceItem(label, value.name)
+        },
         tooltipEnabled = tooltipEnabled,
         valueFormatter = valueFormatter
     )
 }
 
-// String / Enum / Default Overload
+// String / Enum / Lists / Default Overload
 fun <E: Enum<E>> PreferenceScope.enumMultiChoice(
     key: String,
     title: String,
@@ -146,29 +147,30 @@ fun <E: Enum<E>> PreferenceScope.enumMultiChoice(
 ) = add {
     MultiChoicePreference.Default(
         key = key,
-        title = Text(title)!!,
-        description = Text(description),
+        title = title,
+        description = description,
         defaultValue = defaultValue.map { it.name }.toSet(),
-        entries = entries.map { Text(it)!! },
-        entryValues = entryValues.map { it.name },
+        choices = entries.zip(entryValues).map { (label, value) ->
+            ChoiceItem(label, value.name)
+        },
     )
 }
 
-// String Resource / Enum / Default Overload
+// String / Enum / Pairs / Default Overload
 fun <E: Enum<E>> PreferenceScope.enumMultiChoice(
     key: String,
-    @StringRes title: Int,
-    @StringRes description: Int? = null,
+    title: String,
+    description: String? = null,
     defaultValue: Set<E>,
-    @StringRes entries: List<Int>,
-    entryValues: List<E>,
+    choices: List<Pair<String, E>>,
 ) = add {
     MultiChoicePreference.Default(
         key = key,
-        title = Text(title)!!,
-        description = Text(description),
+        title = title,
+        description = description,
         defaultValue = defaultValue.map { it.name }.toSet(),
-        entries = entries.map { Text(it)!! },
-        entryValues = entryValues.map { it.name },
+        choices = choices.map { (label, value) ->
+            ChoiceItem(label, value.name)
+        }
     )
 }

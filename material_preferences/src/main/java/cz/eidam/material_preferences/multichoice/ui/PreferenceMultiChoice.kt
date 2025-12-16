@@ -10,6 +10,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
+import cz.eidam.material_preferences.core.model.ChoiceItem
 import cz.eidam.material_preferences.core.model.PreferenceDialogProperties
 import cz.eidam.material_preferences.generic.ui.PreferenceRow
 
@@ -20,14 +21,11 @@ fun PreferenceMultiChoice(
     description: String? = null,
     values: Set<String>,
     onValueChange: (Set<String>) -> Unit,
-    entries: List<String>,
-    entryValues: List<String>,
+    choices: List<ChoiceItem<String>>,
     tooltipEnabled: Boolean = true,
     dialogProperties: PreferenceDialogProperties = PreferenceDialogProperties.default(title),
     valueDisplayFormatter: (List<String>) -> String,
 ) {
-
-    val pairs = entries.zip(entryValues)
 
     var dialogVisible by rememberSaveable { mutableStateOf(false) }
 
@@ -36,13 +34,13 @@ fun PreferenceMultiChoice(
         description = description,
         onClick = { dialogVisible = true }
     ) {
-        val selectedEntries = pairs.filter { it.second in values }.map { it.first }
+        val selected = choices.map { it.value }.filter { it in values }
 
         if (tooltipEnabled) {
             PreferenceTooltip(
                 tooltip = {
                     Column {
-                        selectedEntries.forEach { selectedEntry ->
+                        selected.forEach { selectedEntry ->
                             Text(
                                 text = selectedEntry,
                                 style = MaterialTheme.typography.bodyMedium,
@@ -53,13 +51,13 @@ fun PreferenceMultiChoice(
             ) {
                 // TODO: extract this text composable somewhere, because it's used on many places
                 Text(
-                    text = valueDisplayFormatter(selectedEntries),
+                    text = valueDisplayFormatter(selected),
                     style = MaterialTheme.typography.titleMedium,
                 )
             }
         } else {
             Text(
-                text = valueDisplayFormatter(selectedEntries),
+                text = valueDisplayFormatter(selected),
                 style = MaterialTheme.typography.titleMedium,
             )
         }
@@ -70,7 +68,7 @@ fun PreferenceMultiChoice(
             onDismissRequest = { dialogVisible = false },
             values = values,
             onValueChange = onValueChange,
-            pairs = pairs,
+            choices = choices,
             properties = dialogProperties,
         )
     }
