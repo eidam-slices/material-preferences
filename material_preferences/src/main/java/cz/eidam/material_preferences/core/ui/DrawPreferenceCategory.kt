@@ -20,7 +20,7 @@ internal fun DrawPreferenceCategory(
     val scope = PreferenceScope()
 
     cz.eidam.material_preferences.category.ui.PreferenceCategory(
-        title = category.title?.value(),
+        title = category.title,
         onExpandedChange = if (category.collapsible) {
             { expanded = it }
         } else null,
