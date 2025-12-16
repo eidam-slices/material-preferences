@@ -6,6 +6,7 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.platform.LocalContext
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
+import cz.eidam.material_preferences.core.model.ChoiceItem
 import cz.eidam.material_preferences.core.utils.dataStore
 import cz.eidam.material_preferences.core.utils.getStringState
 import cz.eidam.material_preferences.core.utils.setString
@@ -17,8 +18,7 @@ fun DataStorePreferenceChoice(
     key: String,
     title: String,
     description: String? = null,
-    entries: List<String>,
-    entryValues: List<String>,
+    choices: List<ChoiceItem<String>>,
     defaultValue: String,
     dataStore: DataStore<Preferences> = LocalContext.current.dataStore,
 ) {
@@ -29,8 +29,7 @@ fun DataStorePreferenceChoice(
         title = title,
         description = description,
         defaultValue = defaultValue,
-        entries = entries,
-        entryValues = entryValues,
+        choices = choices,
         value = value,
         onValueChange = { updated ->
             scope.launch {

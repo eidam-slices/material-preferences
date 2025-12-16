@@ -1,8 +1,9 @@
 package cz.eidam.material_preferences.core.dsl
 
 import cz.eidam.material_preferences.choice.model.ChoicePreference
+import cz.eidam.material_preferences.core.model.ChoiceItem
 
-// String / String Overload
+// String / String / Lists Overload
 fun PreferenceScope.choice(
     key: String,
     title: String,
@@ -16,12 +17,13 @@ fun PreferenceScope.choice(
         title = title,
         description = description,
         defaultValue = defaultValue,
-        entries = entries,
-        entryValues = entryValues
+        choices = entries.zip(entryValues).map { (label, value) ->
+            ChoiceItem(label, value)
+        }
     )
 }
 
-// String / Enum Overload
+// String / Enum / Lists Overload
 fun <E: Enum<E>> PreferenceScope.enumChoice(
     key: String,
     title: String,
@@ -35,7 +37,8 @@ fun <E: Enum<E>> PreferenceScope.enumChoice(
         title = title,
         description = description,
         defaultValue = defaultValue.name,
-        entries = entries,
-        entryValues = entryValues.map { it.name }
+        choices = entries.zip(entryValues).map { (label, value) ->
+            ChoiceItem(label, value.name)
+        }
     )
 }

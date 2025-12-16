@@ -18,6 +18,7 @@ import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import cz.eidam.material_preferences.core.model.ChoiceItem
 import cz.eidam.material_preferences.core.model.PreferenceDialogProperties
 
 
@@ -26,14 +27,11 @@ fun ChoicesDialog(
     onDismissRequest: () -> Unit,
     value: String,
     onValueChange: (String) -> Unit,
-    entries: List<String>,
-    entryValues: List<String>,
+    choices: List<ChoiceItem<String>>,
     properties: PreferenceDialogProperties,
-
     modifier: Modifier = Modifier,
 ) {
     var internal by rememberSaveable { mutableStateOf(value) }
-    val options = entries.zip(entryValues)
 
     AlertDialog(
         onDismissRequest = onDismissRequest,
@@ -41,8 +39,8 @@ fun ChoicesDialog(
         title = { Text(properties.title) },
         text = {
             Column {
-                options.forEach { (entry, entryValue) ->
-                    val selected = entryValue == internal
+                choices.forEach { (label, choiceValue) ->
+                    val selected = choiceValue == internal
 
                     val interactionSource = remember { MutableInteractionSource() }
 
@@ -52,17 +50,17 @@ fun ChoicesDialog(
                             .clickable(
                                 interactionSource = interactionSource,
                                 indication = null,
-                                onClick = { internal = entryValue }
+                                onClick = { internal = choiceValue }
                             ),
                         verticalAlignment = Alignment.CenterVertically
                     ) {
                         RadioButton(
                             selected = selected,
-                            onClick = { internal = entryValue },
+                            onClick = { internal = choiceValue },
                             interactionSource = interactionSource,
                         )
                         Text(
-                            text = entry,
+                            text = label,
                             style = MaterialTheme.typography.titleMedium
                         )
                     }

@@ -100,8 +100,7 @@ internal fun DrawPreferenceRow(
                 key = preference.key,
                 title = preference.title,
                 description = preference.description,
-                entries = preference.entries,
-                entryValues = preference.entryValues,
+                choices = preference.choices,
                 defaultValue = preference.defaultValue,
                 dataStore = dataStore
             )
