@@ -16,7 +16,7 @@ fun PreferenceScope.category(
 
 // String title Overload
 fun PreferenceScope.category(
-    title: String? = null,
+    title: String,
     content: @Composable PreferenceScope.() -> Unit
 ) = add {
     PreferenceCategory(

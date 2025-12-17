@@ -6,7 +6,7 @@ import cz.eidam.material_preferences.rangeslider.model.RangeSliderPreference
 fun PreferenceScope.rangeSlider(
     key: String,
     title: String,
-    description: String?,
+    description: String? = null,
     valueRange: ClosedFloatingPointRange<Float>,
     defaultValue: ClosedFloatingPointRange<Float>,
     step: Float,
@@ -27,7 +27,7 @@ fun PreferenceScope.rangeSlider(
 fun PreferenceScope.rangeSlider(
     key: String,
     title: String,
-    description: String?,
+    description: String? = null,
     valueRange: ClosedFloatingPointRange<Float>,
     defaultValue: ClosedFloatingPointRange<Float>,
     step: Float,
