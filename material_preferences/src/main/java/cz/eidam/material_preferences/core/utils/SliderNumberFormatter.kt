@@ -4,11 +4,14 @@ import java.text.NumberFormat
 import java.util.Locale
 
 internal fun createSliderNumberFormatter(step: Float): NumberFormat {
-    return NumberFormat.getInstance(Locale.getDefault()).apply {
-        val stepIsDecimal = step % 1 != 0f
+    val decimals = step.toString()
+        .substringAfter('.')
+        .trimEnd('0')
+        .length
 
-        minimumFractionDigits = if (stepIsDecimal) 1 else 0
-        maximumFractionDigits = if (stepIsDecimal) 7 else 0
+    return NumberFormat.getInstance(Locale.getDefault()).apply {
+        minimumFractionDigits = decimals
+        maximumFractionDigits = decimals
         isGroupingUsed = false
     }
 }
