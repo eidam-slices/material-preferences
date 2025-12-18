@@ -1,10 +1,23 @@
 package cz.eidam.material_preferences.core.utils
 
-import kotlin.math.roundToInt
+import kotlin.math.pow
+import kotlin.math.round
 
 fun Float.roundToStep(step: Float): Float {
-    return if (step > 0) (this / step).roundToInt() * step
-    else this
+    if (step <= 0f) return this
+
+    val decimals = step
+        .toString()
+        .substringAfter('.', "")
+        .trimEnd('0')
+        .length
+
+    val factor = 10.0.pow(decimals.toDouble())
+
+    val stepped = round((this / step).toDouble()) * step
+    val rounded = round(stepped * factor) / factor
+
+    return rounded.toFloat()
 }
 
 fun ClosedFloatingPointRange<Float>.roundToStep(step: Float): ClosedFloatingPointRange<Float> {

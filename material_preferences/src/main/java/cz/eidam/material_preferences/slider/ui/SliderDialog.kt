@@ -54,7 +54,7 @@ fun SliderDialog(
                 SliderTextField(
                     value = internal,
                     onValueChange = {
-                        internal = it
+                        internal = it.roundToStep(step).coerceIn(valueRange)
                     },
                     valueRange = valueRange,
                     transform = transform

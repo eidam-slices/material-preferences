@@ -24,3 +24,7 @@ include(":material_preferences")
 include(":demo_koin")
 include(":demo_manual")
 include(":demo_shared")
+
+if (file("testing").exists()) {
+    include(":testing")
+}
