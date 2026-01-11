@@ -14,45 +14,13 @@ import cz.eidam.material_preferences.core.utils.serializers.FloatRangeSerializer
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 
+// * STRING:
+internal suspend fun DataStore<Preferences>.setString(key: String, value: String) {
+    this.edit {
+        it[stringPreferencesKey(key)] = value
+    }
+}
 
-//* region COLLECT AS STATE FUNCTIONS
-@Composable
-fun DataStore<Preferences>.getStringState(
-    key: String,
-    defaultValue: String
-) = this.getStringFlow(key, defaultValue)
-    .collectAsState(defaultValue)
-
-@Composable
-fun DataStore<Preferences>.getFloatState(
-    key: String,
-    defaultValue: Float,
-) = this.getFloatFlow(key, defaultValue)
-    .collectAsState(defaultValue)
-
-@Composable
-fun DataStore<Preferences>.getBooleanState(
-    key: String,
-    defaultValue: Boolean,
-) = this.getBooleanFlow(key, defaultValue)
-    .collectAsState(defaultValue)
-
-@Composable
-fun DataStore<Preferences>.getStringSetState(
-    key: String,
-    defaultValue: Set<String>,
-) = this.getStringSetFlow(key, defaultValue)
-    .collectAsState(defaultValue)
-
-@Composable
-fun DataStore<Preferences>.getFloatRangeState(
-    key: String,
-    defaultValue: ClosedFloatingPointRange<Float>,
-) = this.getFloatRangeFlow(key, defaultValue)
-    .collectAsState(defaultValue)
-// endregion
-
-//* region GET FLOW FUNCTIONS
 internal fun DataStore<Preferences>.getStringFlow(
     key: String,
     defaultValue: String
@@ -62,6 +30,20 @@ internal fun DataStore<Preferences>.getStringFlow(
     }
 }
 
+@Composable
+fun DataStore<Preferences>.getStringState(
+    key: String,
+    defaultValue: String
+) = this.getStringFlow(key, defaultValue)
+    .collectAsState(defaultValue)
+
+
+// * FLOAT:
+internal suspend fun DataStore<Preferences>.setFloat(key: String, value: Float) {
+    this.edit {
+        it[floatPreferencesKey(key)] = value
+    }
+}
 
 internal fun DataStore<Preferences>.getFloatFlow(
     key: String,
@@ -73,6 +55,20 @@ internal fun DataStore<Preferences>.getFloatFlow(
     }
 }
 
+@Composable
+fun DataStore<Preferences>.getFloatState(
+    key: String,
+    defaultValue: Float,
+) = this.getFloatFlow(key, defaultValue)
+    .collectAsState(defaultValue)
+
+
+// * BOOLEAN:
+internal suspend fun DataStore<Preferences>.setBoolean(key: String, value: Boolean) {
+    this.edit {
+        it[booleanPreferencesKey(key)] = value
+    }
+}
 
 internal fun DataStore<Preferences>.getBooleanFlow(
     key: String,
@@ -84,6 +80,20 @@ internal fun DataStore<Preferences>.getBooleanFlow(
     }
 }
 
+@Composable
+fun DataStore<Preferences>.getBooleanState(
+    key: String,
+    defaultValue: Boolean,
+) = this.getBooleanFlow(key, defaultValue)
+    .collectAsState(defaultValue)
+
+
+// * STRING SET:
+internal suspend fun DataStore<Preferences>.setStringSet(key: String, value: Set<String>) {
+    this.edit {
+        it[stringSetPreferencesKey(key)] = value
+    }
+}
 
 internal fun DataStore<Preferences>.getStringSetFlow(
     key: String,
@@ -92,6 +102,24 @@ internal fun DataStore<Preferences>.getStringSetFlow(
     return this.data.map { preferences ->
         preferences.safeGet(stringSetPreferencesKey(key))
             ?: defaultValue
+    }
+}
+
+@Composable
+fun DataStore<Preferences>.getStringSetState(
+    key: String,
+    defaultValue: Set<String>,
+) = this.getStringSetFlow(key, defaultValue)
+    .collectAsState(defaultValue)
+
+
+// * FLOAT RANGE:
+internal suspend fun DataStore<Preferences>.setFloatRange(
+    key: String,
+    value: ClosedFloatingPointRange<Float>
+) {
+    this.edit {
+        it[stringPreferencesKey(key)] = serializeFloatRange(value)
     }
 }
 
@@ -106,45 +134,45 @@ internal fun DataStore<Preferences>.getFloatRangeFlow(
     }
 }
 
+@Composable
+fun DataStore<Preferences>.getFloatRangeState(
+    key: String,
+    defaultValue: ClosedFloatingPointRange<Float>,
+) = this.getFloatRangeFlow(key, defaultValue)
+    .collectAsState(defaultValue)
+
+
+// * ENUM:
+internal suspend fun <E: Enum<E>> DataStore<Preferences>.setEnum(key: String, value: E) {
+    this.edit {
+        it[stringPreferencesKey(key)] = value.name
+    }
+}
+
+inline fun <reified E: Enum<E>> DataStore<Preferences>.getEnumFlow(
+    key: String,
+    defaultValue: E
+): Flow<E> {
+    return this.data.map { preferences ->
+        val stored = preferences.safeGet(stringPreferencesKey(key))
+        stored?.let { stored ->
+            enumValueOf<E>(stored)
+        } ?: defaultValue
+    }
+}
+
+@Composable
+inline fun <reified E: Enum<E>> DataStore<Preferences>.getEnumState(
+    key: String,
+    defaultValue: E
+) = this.getEnumFlow(key, defaultValue)
+    .collectAsState(defaultValue)
+
+
+
+// SAFE GET FUNCTION:
 inline fun <reified T> Preferences.safeGet(key: Preferences.Key<T>): T? {
     val stored: Any? = this[key]
     @Suppress("IfThenToSafeAccess")
     return if (stored is T) stored else null
 }
-// endregion
-
-//* region SET FUNCTIONS
-
-internal suspend fun DataStore<Preferences>.setBoolean(key: String, value: Boolean) {
-    this.edit {
-        it[booleanPreferencesKey(key)] = value
-    }
-}
-
-internal suspend fun DataStore<Preferences>.setFloat(key: String, value: Float) {
-    this.edit {
-        it[floatPreferencesKey(key)] = value
-    }
-}
-
-internal suspend fun DataStore<Preferences>.setFloatRange(
-    key: String,
-    value: ClosedFloatingPointRange<Float>
-) {
-    this.edit {
-        it[stringPreferencesKey(key)] = serializeFloatRange(value)
-    }
-}
-
-internal suspend fun DataStore<Preferences>.setString(key: String, value: String) {
-    this.edit {
-        it[stringPreferencesKey(key)] = value
-    }
-}
-
-internal suspend fun DataStore<Preferences>.setStringSet(key: String, value: Set<String>) {
-    this.edit {
-        it[stringSetPreferencesKey(key)] = value
-    }
-}
-// endregion
