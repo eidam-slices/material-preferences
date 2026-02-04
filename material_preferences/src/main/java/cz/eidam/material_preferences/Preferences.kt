@@ -24,6 +24,7 @@ import cz.eidam.material_preferences.core.utils.setFloatRange
 import cz.eidam.material_preferences.core.utils.setString
 import cz.eidam.material_preferences.core.utils.setStringSet
 import kotlinx.coroutines.flow.Flow
+import kotlin.reflect.KClass
 
 class Preferences(val dataStore: DataStore<Preferences>) {
 
@@ -95,6 +96,9 @@ class Preferences(val dataStore: DataStore<Preferences>) {
     // * ENUM:
     suspend fun <E: Enum<E>> setEnum(key: String, value: E) =
         dataStore.setEnum(key, value)
+
+    fun <E: Enum<E>> getEnumFlow(key: String, defaultValue: E, kclass: KClass<E>): Flow<E> =
+        dataStore.getEnumFlow(key, defaultValue, kclass)
 
     inline fun <reified E: Enum<E>> getEnumFlow(key: String, defaultValue: E): Flow<E> =
         dataStore.getEnumFlow(key, defaultValue)
