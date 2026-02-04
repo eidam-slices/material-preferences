@@ -12,6 +12,8 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
+import cz.eidam.demo_shared.DependentPreferencesDemoScreen
+import cz.eidam.demo_shared.DependentPreferencesScreenKey
 import cz.eidam.demo_shared.PreferencesDemoScreen
 import cz.eidam.demo_shared.PreferencesScreenKey
 import cz.eidam.demo_shared.ReadingPreferencesDemoScreen
@@ -48,6 +50,15 @@ class KoinDemoActivity: ComponentActivity() {
                         ReadingPreferencesScreenKey -> {
                             ReadingPreferencesDemoScreen(
                                 preferences = koinInject(),
+                                modifier = modifier,
+                                onGoBack = {
+                                    backStack.removeLastOrNull()
+                                }
+                            )
+                        }
+
+                        DependentPreferencesScreenKey -> {
+                            DependentPreferencesDemoScreen(
                                 modifier = modifier,
                                 onGoBack = {
                                     backStack.removeLastOrNull()

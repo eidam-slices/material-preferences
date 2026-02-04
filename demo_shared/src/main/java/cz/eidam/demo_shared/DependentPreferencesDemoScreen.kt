@@ -32,7 +32,7 @@ fun DependentPreferencesDemoScreen(
             choice(
                 key = PreferenceKeys.EXAMPLE_DEPENDENCY_CHOICE,
                 title = "Example Choice Dependency",
-                description = "Select Option 3 to see more choices",
+                description = "Select Option 3 or 4 to see more choices",
                 entries = entries,
                 entryValues = entryValues,
                 defaultValue = default,
@@ -51,7 +51,7 @@ fun DependentPreferencesDemoScreen(
                     choice(
                         key = PreferenceKeys.EXAMPLE_DEPENDENT_CHOICE,
                         title = "Dependent Choice",
-                        description = "More options if Option 3 / 4 is selected",
+                        description = "More options if Option 3 or 4 is selected",
                         entries = listOf("Dependent 1", "Dependent 2", "Dependent 3"),
                         entryValues = listOf("dependent_1", "dependent_2", "dependent_3"),
                         defaultValue = "dependent_1",
