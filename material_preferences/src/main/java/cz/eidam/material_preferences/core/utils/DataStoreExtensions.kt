@@ -13,6 +13,7 @@ import cz.eidam.material_preferences.core.utils.serializers.FloatRangeSerializer
 import cz.eidam.material_preferences.core.utils.serializers.FloatRangeSerializer.serializeFloatRange
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
+import kotlin.reflect.KClass
 
 // * STRING:
 internal suspend fun DataStore<Preferences>.setString(key: String, value: String) {
@@ -157,6 +158,19 @@ inline fun <reified E: Enum<E>> DataStore<Preferences>.getEnumFlow(
         val stored = preferences.safeGet(stringPreferencesKey(key))
         stored?.let { stored ->
             enumValueOf<E>(stored)
+        } ?: defaultValue
+    }
+}
+
+fun <E: Enum<E>> DataStore<Preferences>.getEnumFlow(
+    key: String,
+    defaultValue: E,
+    kclass: KClass<E>
+): Flow<E> {
+    return this.data.map { preferences ->
+        val stored = preferences.safeGet(stringPreferencesKey(key))
+        stored?.let { stored ->
+            java.lang.Enum.valueOf(kclass.java, stored)
         } ?: defaultValue
     }
 }
