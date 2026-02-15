@@ -15,13 +15,23 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import cz.eidam.material_preferences.core.dsl.*
-import cz.eidam.material_preferences.core.ui.Preferences
+import cz.eidam.material_preferences.core.dsl.category
+import cz.eidam.material_preferences.core.dsl.choice
+import cz.eidam.material_preferences.core.dsl.collapsibleCategory
+import cz.eidam.material_preferences.core.dsl.inlineTextField
+import cz.eidam.material_preferences.core.dsl.multiChoice
+import cz.eidam.material_preferences.core.dsl.rangeSlider
+import cz.eidam.material_preferences.core.dsl.slider
+import cz.eidam.material_preferences.core.dsl.switch
+import cz.eidam.material_preferences.core.dsl.textField
+import cz.eidam.material_preferences.ui.utils.Preferences
+import cz.eidam.material_preferences.utils.Preferences
 
 const val PreferencesScreenKey = "preferences_demo"
 
 @Composable
 fun PreferencesDemoScreen(
+    preferences: Preferences,
     modifier: Modifier = Modifier,
     onNavigate: (String) -> Unit = { }
 ) {
@@ -37,6 +47,7 @@ fun PreferencesDemoScreen(
         )
 
         Preferences(
+            preferences = preferences,
             modifier = Modifier
                 .weight(1f)
                 .verticalScroll(rememberScrollState())

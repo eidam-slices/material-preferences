@@ -6,7 +6,6 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.platform.LocalContext
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
-import cz.eidam.material_preferences.core.utils.dataStore
 import cz.eidam.material_preferences.core.utils.getFloatRangeState
 import cz.eidam.material_preferences.core.utils.setFloatRange
 import kotlinx.coroutines.launch
@@ -21,7 +20,7 @@ fun DataStorePreferenceRangeSlider(
     step: Float,
     transform: (ClosedFloatingPointRange<Float>) -> String =
         RangeSliderPreferenceDefaults.unitFormatter(step, ""),
-    dataStore: DataStore<Preferences> = LocalContext.current.dataStore,
+    dataStore: DataStore<Preferences>,
 ) {
     val value by dataStore.getFloatRangeState(key, defaultValue)
 

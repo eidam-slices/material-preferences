@@ -8,12 +8,14 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import cz.eidam.material_preferences.core.dsl.choice
 import cz.eidam.material_preferences.core.dsl.dependent
-import cz.eidam.material_preferences.core.ui.Preferences
+import cz.eidam.material_preferences.ui.utils.Preferences
+import cz.eidam.material_preferences.utils.Preferences
 
 const val DependentPreferencesScreenKey = "dependent_preferences_demo"
 
 @Composable
 fun DependentPreferencesDemoScreen(
+    preferences: Preferences,
     modifier: Modifier = Modifier,
     onGoBack: () -> Unit,
 ) {
@@ -23,7 +25,10 @@ fun DependentPreferencesDemoScreen(
         horizontalAlignment = Alignment.CenterHorizontally,
     ) {
 
-        Preferences(Modifier.weight(1f)) {
+        Preferences(
+            modifier = Modifier.weight(1f),
+            preferences = preferences,
+        ) {
 
             val entries = List(4) { "Option ${it + 1}" }
             val entryValues = List(4) { "option_${it + 1}" }

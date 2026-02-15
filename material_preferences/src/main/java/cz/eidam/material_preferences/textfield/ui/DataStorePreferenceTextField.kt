@@ -3,11 +3,9 @@ package cz.eidam.material_preferences.textfield.ui
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.rememberCoroutineScope
-import androidx.compose.ui.platform.LocalContext
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
 import cz.eidam.material_preferences.core.model.TextFieldDialogProperties
-import cz.eidam.material_preferences.core.utils.dataStore
 import cz.eidam.material_preferences.core.utils.getStringState
 import cz.eidam.material_preferences.core.utils.setString
 import kotlinx.coroutines.launch
@@ -19,7 +17,7 @@ fun DataStorePreferenceTextField(
     description: String? = null,
     defaultValue: String,
     dialogProperties: TextFieldDialogProperties = TextFieldDialogProperties.default(title),
-    dataStore: DataStore<Preferences> = LocalContext.current.dataStore,
+    dataStore: DataStore<Preferences>,
 ) {
     val value by dataStore.getStringState(key, defaultValue)
 

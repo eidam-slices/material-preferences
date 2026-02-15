@@ -3,10 +3,8 @@ package cz.eidam.material_preferences.slider.ui
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.rememberCoroutineScope
-import androidx.compose.ui.platform.LocalContext
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
-import cz.eidam.material_preferences.core.utils.dataStore
 import cz.eidam.material_preferences.core.utils.getFloatState
 import cz.eidam.material_preferences.core.utils.setFloat
 import kotlinx.coroutines.launch
@@ -20,7 +18,7 @@ fun DataStorePreferenceSlider(
     valueRange: ClosedFloatingPointRange<Float>,
     step: Float,
     transform: (Float) -> String = SliderPreferenceDefaults.unitFormatter(step, ""),
-    dataStore: DataStore<Preferences> = LocalContext.current.dataStore,
+    dataStore: DataStore<Preferences>,
 ) {
     val value by dataStore.getFloatState(key, defaultValue)
 

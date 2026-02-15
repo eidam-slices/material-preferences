@@ -63,7 +63,7 @@ dependencies {
 }
 
 group = "cz.eidam.material-preferences"
-version = "0.2.1"
+version = "0.3.0"
 
 publishing {
     publications {

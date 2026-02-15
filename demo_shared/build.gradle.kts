@@ -61,4 +61,6 @@ dependencies {
     implementation(libs.kotlinx.serialization.json)
 
     implementation(project(":material_preferences"))
+    implementation(project(":material_preferences_utils"))
+    implementation(project(":material_preferences_utils_compose"))
 }

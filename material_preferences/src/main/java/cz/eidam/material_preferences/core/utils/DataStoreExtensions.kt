@@ -16,13 +16,13 @@ import kotlinx.coroutines.flow.map
 import kotlin.reflect.KClass
 
 // * STRING:
-internal suspend fun DataStore<Preferences>.setString(key: String, value: String) {
+suspend fun DataStore<Preferences>.setString(key: String, value: String) {
     this.edit {
         it[stringPreferencesKey(key)] = value
     }
 }
 
-internal fun DataStore<Preferences>.getStringFlow(
+fun DataStore<Preferences>.getStringFlow(
     key: String,
     defaultValue: String
 ): Flow<String> {
@@ -40,13 +40,13 @@ fun DataStore<Preferences>.getStringState(
 
 
 // * FLOAT:
-internal suspend fun DataStore<Preferences>.setFloat(key: String, value: Float) {
+suspend fun DataStore<Preferences>.setFloat(key: String, value: Float) {
     this.edit {
         it[floatPreferencesKey(key)] = value
     }
 }
 
-internal fun DataStore<Preferences>.getFloatFlow(
+fun DataStore<Preferences>.getFloatFlow(
     key: String,
     defaultValue: Float,
 ): Flow<Float> {
@@ -65,13 +65,13 @@ fun DataStore<Preferences>.getFloatState(
 
 
 // * BOOLEAN:
-internal suspend fun DataStore<Preferences>.setBoolean(key: String, value: Boolean) {
+suspend fun DataStore<Preferences>.setBoolean(key: String, value: Boolean) {
     this.edit {
         it[booleanPreferencesKey(key)] = value
     }
 }
 
-internal fun DataStore<Preferences>.getBooleanFlow(
+fun DataStore<Preferences>.getBooleanFlow(
     key: String,
     defaultValue: Boolean,
 ): Flow<Boolean> {
@@ -90,13 +90,13 @@ fun DataStore<Preferences>.getBooleanState(
 
 
 // * STRING SET:
-internal suspend fun DataStore<Preferences>.setStringSet(key: String, value: Set<String>) {
+suspend fun DataStore<Preferences>.setStringSet(key: String, value: Set<String>) {
     this.edit {
         it[stringSetPreferencesKey(key)] = value
     }
 }
 
-internal fun DataStore<Preferences>.getStringSetFlow(
+fun DataStore<Preferences>.getStringSetFlow(
     key: String,
     defaultValue: Set<String>,
 ): Flow<Set<String>> {
@@ -115,7 +115,7 @@ fun DataStore<Preferences>.getStringSetState(
 
 
 // * FLOAT RANGE:
-internal suspend fun DataStore<Preferences>.setFloatRange(
+suspend fun DataStore<Preferences>.setFloatRange(
     key: String,
     value: ClosedFloatingPointRange<Float>
 ) {
@@ -124,7 +124,7 @@ internal suspend fun DataStore<Preferences>.setFloatRange(
     }
 }
 
-internal fun DataStore<Preferences>.getFloatRangeFlow(
+fun DataStore<Preferences>.getFloatRangeFlow(
     key: String,
     defaultValue: ClosedFloatingPointRange<Float>,
 ): Flow<ClosedFloatingPointRange<Float>> {
@@ -144,7 +144,7 @@ fun DataStore<Preferences>.getFloatRangeState(
 
 
 // * ENUM:
-internal suspend fun <E: Enum<E>> DataStore<Preferences>.setEnum(key: String, value: E) {
+suspend fun <E: Enum<E>> DataStore<Preferences>.setEnum(key: String, value: E) {
     this.edit {
         it[stringPreferencesKey(key)] = value.name
     }

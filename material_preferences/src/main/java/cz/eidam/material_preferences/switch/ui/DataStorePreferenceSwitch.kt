@@ -3,10 +3,8 @@ package cz.eidam.material_preferences.switch.ui
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.rememberCoroutineScope
-import androidx.compose.ui.platform.LocalContext
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
-import cz.eidam.material_preferences.core.utils.dataStore
 import cz.eidam.material_preferences.core.utils.getBooleanState
 import cz.eidam.material_preferences.core.utils.setBoolean
 import kotlinx.coroutines.launch
@@ -17,7 +15,7 @@ fun DataStorePreferenceSwitch(
     title: String,
     description: String? = null,
     defaultValue: Boolean,
-    dataStore: DataStore<Preferences> = LocalContext.current.dataStore,
+    dataStore: DataStore<Preferences>,
 ) {
     val value by dataStore.getBooleanState(key, defaultValue)
 
