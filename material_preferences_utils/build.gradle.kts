@@ -1,7 +1,7 @@
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 
 group = "cz.eidam.material-preferences"
-version = "0.3.0"
+version = "0.3.1"
 
 publishing {
     publications {
