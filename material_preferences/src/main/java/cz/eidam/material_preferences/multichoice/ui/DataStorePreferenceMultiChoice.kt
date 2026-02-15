@@ -7,7 +7,6 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
 import cz.eidam.material_preferences.core.model.ChoiceItem
-import cz.eidam.material_preferences.core.utils.dataStore
 import cz.eidam.material_preferences.core.utils.getStringSetState
 import cz.eidam.material_preferences.core.utils.setStringSet
 import kotlinx.coroutines.launch
@@ -21,7 +20,7 @@ fun DataStorePreferenceMultiChoice(
     choices: List<ChoiceItem<String>>,
     tooltipEnabled: Boolean = true,
     valueDisplayFormatter: (List<String>) -> String = MultiChoicePreferenceDefaults.formatter(),
-    dataStore: DataStore<Preferences> = LocalContext.current.dataStore,
+    dataStore: DataStore<Preferences>,
 ) {
     val values by dataStore.getStringSetState(key, defaultValue)
 
