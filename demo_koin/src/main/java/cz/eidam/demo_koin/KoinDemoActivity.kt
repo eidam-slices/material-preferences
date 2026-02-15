@@ -43,6 +43,7 @@ class KoinDemoActivity: ComponentActivity() {
                         PreferencesScreenKey -> {
                             PreferencesDemoScreen(
                                 modifier = modifier,
+                                preferences = koinInject(),
                                 onNavigate = { backStack.add(it) }
                             )
                         }
@@ -60,6 +61,7 @@ class KoinDemoActivity: ComponentActivity() {
                         DependentPreferencesScreenKey -> {
                             DependentPreferencesDemoScreen(
                                 modifier = modifier,
+                                preferences = koinInject(),
                                 onGoBack = {
                                     backStack.removeLastOrNull()
                                 }

@@ -12,7 +12,12 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import cz.eidam.material_preferences.Preferences
+import cz.eidam.material_preferences.ui.utils.getBooleanState
+import cz.eidam.material_preferences.ui.utils.getFloatRangeState
+import cz.eidam.material_preferences.ui.utils.getFloatState
+import cz.eidam.material_preferences.ui.utils.getStringSetState
+import cz.eidam.material_preferences.ui.utils.getStringState
+import cz.eidam.material_preferences.utils.Preferences
 
 const val ReadingPreferencesScreenKey = "reading_preferences_demo"
 

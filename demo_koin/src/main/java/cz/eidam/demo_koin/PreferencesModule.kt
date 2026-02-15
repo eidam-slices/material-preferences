@@ -1,8 +1,12 @@
 package cz.eidam.demo_koin
 
-import cz.eidam.material_preferences.Preferences
+import cz.eidam.material_preferences.utils.Preferences
 import org.koin.dsl.module
 
 val preferencesModule = module {
-    single { Preferences(context = get()) }
+    single {
+        Preferences(
+            context = get()
+        )
+    }
 }

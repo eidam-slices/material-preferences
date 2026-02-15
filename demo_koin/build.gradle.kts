@@ -67,4 +67,5 @@ dependencies {
 
     implementation(project(":demo_shared"))
     implementation(project(":material_preferences"))
+    implementation(project(":material_preferences_utils"))
 }

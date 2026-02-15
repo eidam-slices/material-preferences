@@ -21,7 +21,7 @@ import cz.eidam.demo_shared.PreferencesScreenKey
 import cz.eidam.demo_shared.ReadingPreferencesDemoScreen
 import cz.eidam.demo_shared.ReadingPreferencesScreenKey
 import cz.eidam.demo_shared.theme.MaterialPreferencesTheme
-import cz.eidam.material_preferences.Preferences
+import cz.eidam.material_preferences.utils.Preferences
 
 lateinit var preferences: Preferences
 
@@ -47,6 +47,7 @@ class ManualDemoActivity: ComponentActivity() {
                         PreferencesScreenKey -> {
                             PreferencesDemoScreen(
                                 modifier = modifier,
+                                preferences = preferences,
                                 onNavigate = { backStack.add(it) }
                             )
                         }
@@ -62,6 +63,7 @@ class ManualDemoActivity: ComponentActivity() {
                         DependentPreferencesScreenKey -> {
                             DependentPreferencesDemoScreen(
                                 modifier = modifier,
+                                preferences = preferences,
                                 onGoBack = { backStack.removeLastOrNull() }
                             )
                         }

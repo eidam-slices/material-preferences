@@ -1,25 +1,42 @@
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 
+group = "cz.eidam.material-preferences"
+version = "0.2.4"
+
+publishing {
+    publications {
+        create<MavenPublication>("release") {
+            afterEvaluate {
+                from(components["release"])
+            }
+            groupId = project.group.toString()
+            artifactId = "utils"
+            version = project.version.toString()
+        }
+    }
+}
+
 plugins {
-    alias(libs.plugins.android.application)
+    alias(libs.plugins.android.library)
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.compose)
+    id("maven-publish")
 }
 
 android {
-    namespace = "cz.eidam.demo_manual"
+    namespace = "cz.eidam.material_preferences.ui.utils"
+
+    buildFeatures {
+        compose = true
+    }
+
     compileSdk {
         version = release(36)
     }
 
     defaultConfig {
-        applicationId = "cz.eidam.demo_manual"
         minSdk = 26
-        targetSdk = 36
-        versionCode = 1
-        versionName = "1.0"
-
-        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+//        consumerProguardFiles("consumer-rules.pro")
     }
 
     buildTypes {
@@ -35,9 +52,6 @@ android {
         sourceCompatibility = JavaVersion.VERSION_11
         targetCompatibility = JavaVersion.VERSION_11
     }
-    buildFeatures {
-        compose = true
-    }
 }
 
 kotlin {
@@ -46,19 +60,12 @@ kotlin {
     }
 }
 
+
 dependencies {
-    implementation(libs.androidx.core.ktx)
-    implementation(libs.androidx.lifecycle.runtime.ktx)
-    implementation(libs.androidx.activity.compose)
     implementation(platform(libs.androidx.compose.bom))
     implementation(libs.androidx.compose.ui)
-    implementation(libs.androidx.compose.ui.graphics)
-    implementation(libs.androidx.compose.ui.tooling.preview)
-    implementation(libs.androidx.compose.material3)
-    debugImplementation(libs.androidx.compose.ui.tooling)
-    debugImplementation(libs.androidx.compose.ui.test.manifest)
+    implementation(libs.androidx.datastore.preferences)
 
-    implementation(project(":demo_shared"))
     implementation(project(":material_preferences"))
     implementation(project(":material_preferences_utils"))
 }
