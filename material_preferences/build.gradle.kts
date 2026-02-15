@@ -1,5 +1,22 @@
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 
+group = "cz.eidam.material-preferences"
+version = "0.3.1"
+
+publishing {
+    publications {
+        create<MavenPublication>("release") {
+            afterEvaluate {
+                from(components["release"])
+            }
+            groupId = project.group.toString()
+            artifactId = "core"
+            version = project.version.toString()
+        }
+
+    }
+}
+
 plugins {
     alias(libs.plugins.android.library)
     alias(libs.plugins.kotlin.android)
@@ -62,19 +79,3 @@ dependencies {
     implementation(libs.androidx.datastore.preferences)
 }
 
-group = "cz.eidam.material-preferences"
-version = "0.2.1"
-
-publishing {
-    publications {
-        create<MavenPublication>("release") {
-            afterEvaluate {
-                from(components["release"])
-            }
-            groupId = project.group.toString()
-            artifactId = "material-preferences"
-            version = project.version.toString()
-        }
-
-    }
-}
